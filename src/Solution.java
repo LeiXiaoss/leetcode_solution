@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Solution {
     //给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
@@ -47,7 +49,8 @@ public class Solution {
         throw new IllegalArgumentException("No two sum Solution");
     }
 
-    //给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。
+    //给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。
+    // 将两数相加返回一个新的链表。
     //
     //你可以假设除了数字 0 之外，这两个数字都不会以零开头。
 
@@ -87,5 +90,129 @@ public class Solution {
         }
 
         return result.next;
+    }
+
+    //给定一个字符串，找出不含有重复字符的最长子串的长度。
+    //
+    //示例 1:
+    //
+    //输入: "abcabcbb"
+    //输出: 3
+    //解释: 无重复字符的最长子串是 "abc"，其长度为 3。
+    //
+    //示例 2:
+    //
+    //输入: "bbbbb"
+    //输出: 1
+    //解释: 无重复字符的最长子串是 "b"，其长度为 1。
+    //
+    //示例 3:
+    //
+    //输入: "pwwkew"
+    //输出: 3
+    //解释: 无重复字符的最长子串是 "wke"，其长度为 3。
+    //     请注意，答案必须是一个子串，"pwke" 是一个子序列 而不是子串。
+
+    //滑动窗口
+    //时间复杂度O(2n)=O(n)
+    //空间复杂度O(min(m,n))
+    public int lengrhOfLongestSubstring1(String s){
+        if (s == null) return 0;
+
+        Set<Character> strSet = new HashSet<>();
+        int i=0,j=0,ans=0;
+        int n=s.length();
+
+        while (i<n&&j<n){
+            if(!strSet.contains(s.charAt(j))){
+                strSet.add(s.charAt(j++));
+                ans = Math.max(ans,j-i);
+            }else {
+                strSet.remove(s.charAt(i++));
+            }
+        }
+        return ans;
+    }
+
+    //优化滑动窗口
+    //时间复杂度O(n)
+    //空间复杂度O(min(m,n))
+    public int lengthOfLongestSubstring(String s) {
+        if(s == null) return 0;
+
+        Map<Character,Integer> strMap = new HashMap<>();
+        int n = s.length(),ans = 0;
+
+        for(int i=0,j=0;j<n;j++){
+            if(strMap.containsKey(s.charAt(j))){
+                //如果字符重复，移动滑动窗口的end
+                i = Math.max(strMap.get(s.charAt(j)),i);
+            }
+            ans = Math.max(ans,j-i+1);
+            //map保存字符与重复字符的下一个下标
+            strMap.put(s.charAt(j),j+1);
+        }
+        return ans;
+    }
+
+    //给定两个大小为 m 和 n 的有序数组 nums1 和 nums2 。
+    //
+    //请找出这两个有序数组的中位数。要求算法的时间复杂度为 O(log (m+n)) 。
+    //
+    //你可以假设 nums1 和 nums2 不同时为空。
+    //
+    //示例 1:
+    //
+    //nums1 = [1, 3]
+    //nums2 = [2]
+    //
+    //中位数是 2.0
+    //
+    //示例 2:
+    //
+    //nums1 = [1, 2]
+    //nums2 = [3, 4]
+    //
+    //中位数是 (2 + 3)/2 = 2.5
+
+//    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+//
+//    }
+
+    //给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。
+    //
+    //示例 1：
+    //
+    //输入: "babad"
+    //输出: "bab"
+    //注意: "aba"也是一个有效答案。
+    //
+    //示例 2：
+    //
+    //输入: "cbbd"
+    //输出: "bb"
+
+    //动态规划
+    public String longestPalindrome(String s) {
+        if(s.length() == 0||s==null) return s;
+
+        int maxLen = 0;
+        int start = 0;
+        boolean[][] isPal = new boolean[s.length()][s.length()];
+
+        for (int i=0;i<s.length();i++){
+            int j = i;
+            while (j>=0){
+                if(s.charAt(i)==s.charAt(j)&&(i-j<2||isPal[j+1][i-1])){
+                    isPal[j][i] = true;
+                    if (maxLen <= i-j+1){
+                        maxLen = i-j+1;
+                        start = j;
+                    }
+                }
+                j--;
+            }
+        }
+        return s.substring(start,start+maxLen);
     }
 }
