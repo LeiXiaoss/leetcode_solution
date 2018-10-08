@@ -215,4 +215,89 @@ public class Solution {
         }
         return s.substring(start,start+maxLen);
     }
+
+    //将字符串 "PAYPALISHIRING" 以Z字形排列成给定的行数：
+    //
+    //P   A   H   N
+    //A P L S I I G
+    //Y   I   R
+    //
+    //之后从左往右，逐行读取字符："PAHNAPLSIIGYIR"
+    //
+    //实现一个将字符串进行指定行数变换的函数:
+    //
+    //string convert(string s, int numRows);
+    //
+    //示例 1:
+    //
+    //输入: s = "PAYPALISHIRING", numRows = 3
+    //输出: "PAHNAPLSIIGYIR"
+    //
+    //示例 2:
+    //
+    //输入: s = "PAYPALISHIRING", numRows = 4
+    //输出: "PINALSIGYAHRPI"
+    //解释:
+    //
+    //P0      I6       N12
+    //A1   L5 S7    I11   G13
+    //Y2 A4   H8 R10
+    //P3      I9
+
+    public String convert(String s, int numRows) {
+        if(numRows == 1) return s;
+        if(s == null || s.length() == 1) return s;
+
+        StringBuilder sCov = new StringBuilder();
+        int n = s.length();
+        int len = numRows*2 -2;
+
+        for (int i=0;i<numRows;i++){
+            for (int j=0;j+i<n;j+=len){
+                sCov.append(s.charAt(i+j));
+                if(i!=0&&i!=numRows-1&&j+len-i<n){
+                    sCov.append(s.charAt(j+len-i));
+                }
+            }
+        }
+
+        return sCov.toString();
+    }
+
+    //给定一个 32 位有符号整数，将整数中的数字进行反转。
+    //
+    //示例 1:
+    //
+    //输入: 123
+    //输出: 321
+    //
+    // 示例 2:
+    //
+    //输入: -123
+    //输出: -321
+    //
+    //示例 3:
+    //
+    //输入: 120
+    //输出: 21
+    //
+    //注意:
+    //
+    //假设我们的环境只能存储 32 位有符号整数，
+    // 其数值范围是 [−231,  231 − 1]。根据这个假设，如果反转后的整数溢出，则返回 0。
+
+    public int reverse(int x) {
+        int rev = 0;
+
+        while(x != 0){
+            int pop = x%10;
+            x = x/10;
+
+            if(rev>Integer.MAX_VALUE/10||(rev==Integer.MAX_VALUE/10&&pop>7)) return 0;
+            if(rev<Integer.MIN_VALUE/10||(rev==Integer.MIN_VALUE/10&&pop<-8)) return 0;
+
+            rev = rev*10 + pop;
+        }
+        return rev;
+    }
 }
