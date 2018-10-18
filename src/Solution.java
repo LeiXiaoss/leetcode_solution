@@ -977,22 +977,38 @@ public class Solution {
         if(nums.length<4) return Collections.emptyList();
 
         Arrays.sort(nums);
+        int max = nums[nums.length-1];
         List<List<Integer>> sumList = new ArrayList<>();
         for (int i=0;i<nums.length-3;i++){
-            if(nums[i]*4>target) break;
+
+            if (nums[i]*4>target) break;
+            if (nums[i]+3*max<target) continue;
+            if (i!=0&&i<nums.length-3&&nums[i]==nums[i-1]) continue;
+
             for (int j=i+1;j<nums.length-2;j++){
+
+                if (j!=i+1&&j<nums.length-2&&nums[j]==nums[j-1]) continue;
+                if (nums[i]+nums[j]*3>target) break;
+                if (nums[i]+nums[j]+max*2<target) continue;
+
                 int start = j+1;
                 int end = nums.length-1;
                 while (start<end){
                     if(nums[i]+nums[j]+nums[start]+nums[end]==target){
                         List<Integer> numList = new ArrayList<>();
-                        numList.add(i);
-                        numList.add(j);
-                        numList.add(start);
-                        numList.add(end);
+                        numList.add(nums[i]);
+                        numList.add(nums[j]);
+                        numList.add(nums[start]);
+                        numList.add(nums[end]);
                         sumList.add(numList);
                         start++;
+                        while (start<end&&nums[start]==nums[start-1]){
+                            start++;
+                        }
                         end--;
+                        while (start<end&&nums[end]==nums[end+1]){
+                            end--;
+                        }
                     }else if(nums[i]+nums[j]+nums[start]+nums[end]<target){
                         start++;
                     }else {
@@ -1001,6 +1017,6 @@ public class Solution {
                 }
             }
         }
+        return sumList;
     }
-
 }
