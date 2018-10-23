@@ -1019,4 +1019,128 @@ public class Solution {
         }
         return sumList;
     }
+
+    //给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+    //
+    //示例：
+    //
+    //给定一个链表: 1->2->3->4->5, 和 n = 2.
+    //
+    //当删除了倒数第二个节点后，链表变为 1->2->3->5.
+    //
+    //说明：
+    //
+    //给定的 n 保证是有效的。
+    //
+    //进阶：
+    //
+    //你能尝试使用一趟扫描实现吗？
+
+    public ListNode removeNthFromEnd(ListNode head,int n){
+        int length = 0;
+        ListNode temp = head;
+        while (temp!=null){
+            temp = temp.next;
+            length++;
+        }
+
+        int nthFromFirst = length - n;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        temp = dummy;
+
+        while (nthFromFirst > 0){
+            nthFromFirst--;
+            temp = temp.next;
+        }
+
+        temp.next = temp.next.next;
+
+        return dummy.next;
+    }
+
+    public ListNode removeNthFromEnd1(ListNode head,int n){
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode first = dummy;
+        ListNode second = dummy;
+
+        for (int i=0;i<n;i++){
+            first = first.next;
+        }
+
+        while (first.next!=null){
+            second = second.next;
+            first = first.next;
+        }
+
+        second.next = second.next.next;
+
+        return dummy.next;
+    }
+
+    //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+    //
+    //有效字符串需满足：
+    //
+    //    左括号必须用相同类型的右括号闭合。
+    //    左括号必须以正确的顺序闭合。
+    //
+    //注意空字符串可被认为是有效字符串。
+    //
+    //示例 1:
+    //
+    //输入: "()"
+    //输出: true
+    //
+    //示例 2:
+    //
+    //输入: "()[]{}"
+    //输出: true
+    //
+    //示例 3:
+    //
+    //输入: "(]"
+    //输出: false
+    //
+    //示例 4:
+    //
+    //输入: "([)]"
+    //输出: false
+    //
+    //示例 5:
+    //
+    //输入: "{[]}"
+    //输出: true
+
+    public boolean isValid(String s){
+        char[] ch = s.toCharArray();
+        Stack<Character> chStack = new Stack<>();
+
+        for(int i=0;i<ch.length;i++){
+            if(ch[i]=='{'||ch[i]=='['||ch[i]=='('){
+                chStack.push(ch[i]);
+            }else if(!chStack.isEmpty()) {
+                if(chStack.peek()=='{'&&ch[i]=='}'){
+                    chStack.pop();
+                    continue;
+                }else if(chStack.peek()=='['&&ch[i]==']'){
+                    chStack.pop();
+                    continue;
+                }else if(chStack.peek()=='('&&ch[i]==')'){
+                    chStack.pop();
+                    continue;
+                }else {
+                    return false;
+                }
+            }else {
+                return false;
+            }
+        }
+        if(!chStack.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 }
