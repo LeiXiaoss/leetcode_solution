@@ -1143,4 +1143,72 @@ public class Solution {
         }
         return true;
     }
+
+    //将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+    //
+    //示例：
+    //
+    //输入：1->2->4, 1->3->4
+    //输出：1->1->2->3->4->4
+
+    //链表
+    public ListNode mergeTwoList(ListNode l1,ListNode l2){
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode firstNode = dummy;
+
+        while (l1!=null&&l2!=null){
+            if(l1.val<=l2.val){
+                firstNode.next = l1;
+                l1 = l1.next;
+            }else {
+                firstNode.next = l2;
+                l2 = l2.next;
+            }
+            firstNode = firstNode.next;
+        }
+        while (l1!=null){
+            firstNode.next = l1;
+            l1 = l1.next;
+            firstNode = firstNode.next;
+        }
+        while (l2!=null){
+            firstNode.next = l2;
+            l2 = l2.next;
+            firstNode = firstNode.next;
+        }
+        return dummy.next;
+    }
+
+    //给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+    //
+    //例如，给出 n = 3，生成结果为：
+    //
+    //[
+    //  "((()))",
+    //  "(()())",
+    //  "(())()",
+    //  "()(())",
+    //  "()()()"
+    //]
+
+    //回溯法
+    public List<String> generateParenthesis(int n){
+        List<String> ans = new ArrayList<>();
+        backTrack(ans,"",0,0,n);
+        return ans;
+    }
+
+    public void backTrack(List<String> ans,String cur,int open,int close,int max){
+        if(cur.length() == max*2){
+            ans.add(cur);
+            return;
+        }
+
+        if(open<max){
+            backTrack(ans,cur+"(",open+1,close,max);
+        }
+        if(open>close){
+            backTrack(ans,cur+")",open,close+1,max);
+        }
+    }
 }
