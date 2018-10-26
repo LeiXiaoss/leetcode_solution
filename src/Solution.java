@@ -1211,4 +1211,83 @@ public class Solution {
             backTrack(ans,cur+")",open,close+1,max);
         }
     }
+
+    //合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
+    //
+    //示例:
+    //
+    //输入:
+    //[
+    //  1->4->5,
+    //  1->3->4,
+    //  2->6
+    //]
+    //输出: 1->1->2->3->4->4->5->6
+
+    //分治法
+    public ListNode mergeKList(ListNode[] lists){
+        if(lists.length == 0) return null;
+        return divide(lists,0,lists.length-1);
+    }
+
+    public ListNode divide(ListNode[] lists,int left,int right){
+        if(left>=right) return lists[left];
+
+        int mid = (left+right) >> 1;
+
+        ListNode l1 = divide(lists,left,mid);
+        ListNode l2 = divide(lists,mid+1,right);
+
+        return merge2List(l1,l2);
+    }
+
+    public ListNode merge2List(ListNode l1,ListNode l2){
+        ListNode dummy = new ListNode(Integer.MIN_VALUE);
+        ListNode first = dummy;
+
+        while (l1!=null&&l2!=null){
+            if(l1.val<=l2.val){
+                first.next = l1;
+                l1 = l1.next;
+            }else {
+                first.next = l2;
+                l2 = l2.next;
+            }
+            first = first.next;
+        }
+
+        //超时
+//        while (l1!=null){
+//            first.next = l1;
+//        }
+//        while (l2!=null){
+//            first.next = l2;
+//        }
+        first.next = l1!=null?l1:l2;
+        return dummy.next;
+    }
+
+    //给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+    //
+    //示例:
+    //
+    //给定 1->2->3->4, 你应该返回 2->1->4->3.
+    //
+    //说明:
+    //
+    //    你的算法只能使用常数的额外空间。
+    //    你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+
+    public ListNode swapPairs(ListNode head) {
+        ListNode preHead = new ListNode(0), cur = preHead;
+        preHead.next = head;
+        while (cur.next != null && cur.next.next != null) {
+            ListNode temp = cur.next.next;
+            cur.next.next = temp.next;
+            temp.next = cur.next;
+            cur.next = temp;
+            cur = cur.next.next;
+        }
+        return preHead.next;
+    }
 }
