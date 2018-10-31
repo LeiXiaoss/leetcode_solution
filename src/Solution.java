@@ -1459,4 +1459,162 @@ public class Solution {
         }
         return n;
     }
+
+    //实现 strStr() 函数。
+    //
+    //给定一个 haystack 字符串和一个 needle 字符串，
+    // 在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+    //
+    //示例 1:
+    //
+    //输入: haystack = "hello", needle = "ll"
+    //输出: 2
+    //
+    //示例 2:
+    //
+    //输入: haystack = "aaaaa", needle = "bba"
+    //输出: -1
+    //
+    //说明:
+    //
+    //当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
+    //
+    //对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr()
+    // 以及 Java的 indexOf() 定义相符。
+
+    //两个指针分别指向两个字符串，逐个字符比较，如果出现不同的字符，要考虑字符回退的情况
+    public int strStr(String haystack,String needle){
+        if(needle==null||needle.length()==0) return 0;
+        if(needle.length()>haystack.length()) return -1;
+
+        int first=0,second=0;
+        while (first<=haystack.length()-1&&second<=needle.length()-1){
+            if(haystack.charAt(first) == needle.charAt(second)){
+                first++;
+                second++;
+            }else {
+                first = first-second+1;
+                second = 0;
+            }
+        }
+        if(second>=needle.length()){
+            return first-second;
+        }else {
+            return -1;
+        }
+    }
+
+    //从主串找子串的索引，将主串分割为子串长度相当的若干子串，再进行比较
+    public int strStr1(String haystack,String needle){
+        if(needle==null||needle.length()==0) return 0;
+        if(needle.length()>haystack.length()) return -1;
+
+        int length = needle.length();
+        for (int i=0;i+length<=haystack.length();i++){
+            if(haystack.substring(i,i+length).equals(needle)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。
+    //
+    //返回被除数 dividend 除以除数 divisor 得到的商。
+    //
+    //示例 1:
+    //
+    //输入: dividend = 10, divisor = 3
+    //输出: 3
+    //
+    //示例 2:
+    //
+    //输入: dividend = 7, divisor = -3
+    //输出: -2
+    //
+    //说明:
+    //
+    //被除数和除数均为 32 位有符号整数。
+    //除数不为 0。
+    //假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。
+    //本题中，如果除法结果溢出，则返回 231 − 1。
+
+    //没懂
+    public int divide(int dividend,int divisor){
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+        long dvd = Math.abs((long) dividend);
+        long dvr = Math.abs((long) divisor);
+        int res = 0;
+        while (dvd >= dvr) {
+            long temp = dvr, multiple = 1;
+            while (dvd >= temp << 1) {
+                temp <<= 1;
+                multiple <<= 1;
+            }
+            dvd -= temp;
+            res += multiple;
+        }
+        return (dividend < 0) ^ (divisor < 0) ? -res : res;
+    }
+
+    //给定一个字符串 s 和一些长度相同的单词 words。在 s 中找出可以恰好串联 words 中所有单词的子串的起始位置。
+    //
+    //注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。
+    //
+    //示例 1:
+    //
+    //输入:
+    //  s = "barfoothefoobarman",
+    //  words = ["foo","bar"]
+    //输出: [0,9]
+    //解释: 从索引 0 和 9 开始的子串分别是 "barfoor" 和 "foobar" 。
+    //输出的顺序不重要, [9,0] 也是有效答案。
+    //
+    //示例 2:
+    //
+    //输入:
+    //  s = "wordgoodstudentgoodword",
+    //  words = ["word","student"]
+    //输出: []
+
+    //难
+    public List<Integer> findSubstring(String s,String[] words){
+        List<Integer> res = new ArrayList<>();
+        if (s.length() == 0 || words.length == 0) {
+            return res;
+        }
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String str : words) {
+            map.put(str, map.containsKey(str) ? map.get(str) + 1 : 1);
+        }
+
+        int len = words[0].length();
+        for (int i = 0; i <= s.length() - len * words.length; i++) {
+            HashMap<String, Integer> tempMap = new HashMap<>(map);
+            int temp = i;
+            int count = 0;
+            String tempStr = s.substring(temp, temp + len);
+            while (tempMap.containsKey(tempStr) && tempMap.get(tempStr) > 0) {
+                tempMap.put(tempStr, tempMap.get(tempStr) - 1);
+                temp = temp + len;
+                count++;
+                if (temp + len <= s.length()) {
+                    tempStr = s.substring(temp, temp + len);
+                } else {
+                    break;
+                }
+            }
+            if (count == words.length) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args){
+        System.out.println(new Solution().findSubstring("barfoothefoobarman",new String[]{"foo","bar"}));
+    }
 }
