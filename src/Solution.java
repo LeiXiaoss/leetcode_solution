@@ -47,6 +47,13 @@ public class Solution {
         return (dividend < 0) ^ (divisor < 0) ? -res : res;
     }
 
+    public static void main(String[] args){
+        String s1 = "abc";
+
+        System.out.println(s1==new String("abc "));
+        System.out.println(s1.equals(new String("abc")));
+    }
+
 
 
 
