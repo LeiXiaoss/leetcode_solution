@@ -60,5 +60,8 @@ public class Solution {
 
     public static void main(String[] args){
         System.out.println(new Solution().countAndSay(7));
+        String a = "abcd";
+        System.out.println(a.charAt(0));
+        System.out.println(a.charAt(3));
     }
 }
