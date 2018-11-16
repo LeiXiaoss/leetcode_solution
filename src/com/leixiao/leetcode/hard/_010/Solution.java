@@ -79,8 +79,28 @@ public class Solution {
         return isMatch(s,p.substring(2));
     }
 
-    //还有dp解法
+    //递归
     public boolean isMatch1(String s,String p){
+        if (p.isEmpty()) return s.isEmpty();
+        if (p.length() == 1) {
+            return s.length() == 1 && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.');
+        }
+        if (p.charAt(1) != '*') {
+            if (s.isEmpty()) return false;
+            return (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.')
+                    && isMatch1(s.substring(1), p.substring(1));
+        }
+        // match 1 or more preceding element
+        while (!s.isEmpty() && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.')) {
+            if (isMatch(s, p.substring(2))) return true;
+            s = s.substring(1);
+        }
+        // match 0 preceding element
+        return isMatch1(s, p.substring(2));
+    }
+
+    //还有dp解法
+    public boolean isMatch2(String s,String p){
         boolean[][] dp = new boolean[s.length()+1][p.length()+1];
         dp[0][0]=true;
 
