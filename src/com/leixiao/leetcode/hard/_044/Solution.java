@@ -70,4 +70,38 @@ public class Solution {
         while (pi<pl&&pChar[pi]=='*') pi++;
         return pi==pl;
     }
+
+    public static void main(String[] args){
+        Solution solution = new Solution();
+        solution.isMatch1("adceb","*a*b");
+    }
+
+    //动态规划
+    public boolean isMatch1(String s,String p){
+        if(p.length()==0) return s.length()==0;
+
+        boolean[][] dp = new boolean[s.length()+1][p.length()+1];
+        char[] sChar = s.toCharArray();
+        char[] pChar = p.toCharArray();
+        dp[0][0] = true;
+
+        for (int i=0;i<p.length();i++){
+            if(pChar[i] == '*'){
+                dp[0][i+1] = dp[0][i];
+            }else {
+                dp[0][i+1] = false;
+            }
+        }
+
+        for (int i=0;i<s.length();i++){
+            for (int j=0;j<p.length();j++){
+                if(pChar[j] == '*'){
+                    dp[i+1][j+1] = dp[i][j+1]||dp[i+1][j];
+                }else {
+                    dp[i+1][j+1] = dp[i][j] && (sChar[i]==pChar[j]||pChar[j]=='?');
+                }
+            }
+        }
+        return dp[s.length()][p.length()];
+    }
 }
