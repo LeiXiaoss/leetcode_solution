@@ -80,4 +80,32 @@ public class Solution {
     }
 
     //还有dp解法
+    public boolean isMatch1(String s,String p){
+        boolean[][] dp = new boolean[s.length()+1][p.length()+1];
+        dp[0][0]=true;
+
+        char[] sChar = s.toCharArray(),pChar = p.toCharArray();
+
+        for (int j=2;j<=p.length();j++){
+            if(pChar[j-1] == '*'&&dp[0][j-2]){
+                dp[0][j] = true;
+            }
+        }
+
+        for (int i=0;i<s.length();i++){
+            for (int j=0;j<p.length();j++){
+                if(pChar[j] == '*'){
+                    dp[i+1][j+1] = dp[i+1][j-1]||(sChar[i]==pChar[j-1]||pChar[j-1]=='.')&&dp[i][j+1];
+                }else {
+                    dp[i+1][j+1] = dp[i][j] && (sChar[i]==pChar[j]||pChar[j]=='.');
+                }
+            }
+        }
+        return dp[s.length()][p.length()];
+    }
+
+    public static void main(String[] args){
+        Solution solution = new Solution();
+        System.out.println(solution.isMatch1("",".*"));
+    }
 }
