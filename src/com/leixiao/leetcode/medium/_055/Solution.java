@@ -48,10 +48,24 @@ public class Solution {
         return dp[nums.length-1]>=0;
     }
 
+    public boolean canJump2(int[] nums){
+        boolean[] dp = new boolean[nums.length];
+        dp[0] = true;
+
+        for (int i=0;i<nums.length;i++){
+            if (dp[i]==false) return false;
+            for (int j=i+1;j<=nums[i]+i&&j<nums.length;j++){
+                dp[j] = true;
+            }
+        }
+
+        return dp[nums.length-1];
+    }
     public static void main(String[] args){
         Solution solution = new Solution();
-        int[] arr = new int[]{3,2,1,0,4};
+        int[] arr = new int[]{2,3,1,1,4};
         System.out.println(solution.canJump(arr));
         System.out.println(solution.canJump1(arr));
+        System.out.println(solution.canJump2(arr));
     }
 }
