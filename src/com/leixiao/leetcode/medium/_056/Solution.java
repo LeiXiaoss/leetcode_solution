@@ -27,10 +27,15 @@ public class Solution {
         });
 
         List<Interval> mergeList = new ArrayList<>();
+        Interval first = null;
         for (Interval interval : intervals){
-
+            if(first==null||first.end<interval.start){
+                mergeList.add(interval);
+                first = interval;
+            }else if(first.end<interval.end){
+                first.end = interval.end;
+            }
         }
-
-        return null;
+        return mergeList;
     }
 }
