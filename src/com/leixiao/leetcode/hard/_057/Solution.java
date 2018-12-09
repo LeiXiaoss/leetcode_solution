@@ -24,16 +24,20 @@ public class Solution {
         List<Interval> result = new ArrayList();
 
         for (Interval item : intervals){
-            if(item.end<newInterval.start){
+            if(newInterval == null || item.end < newInterval.start){
                 result.add(item);
-            }else if(item.end<newInterval.end&&item.start<=newInterval.start){
-                newInterval.start = item.start;
-            }else if(item.end>newInterval.end&&item.start>=newInterval.start){
-                newInterval.end = item.end;
-            }else if(item.start>newInterval.end){
+            }else if(item.start > newInterval.end){
                 result.add(newInterval);
                 result.add(item);
+                newInterval = null;
+            }else {
+                newInterval.start = Math.min(newInterval.start,item.start);
+                newInterval.end = Math.max(newInterval.end,item.end);
             }
+        }
+
+        if(newInterval != null){
+            result.add(newInterval);
         }
         return result;
     }
@@ -46,7 +50,7 @@ public class Solution {
         Interval newInterval = new Interval(2,5);
 
         Solution solution = new Solution();
-        List result = solution.insert(intervals,newInterval);
+        List<Interval> result = solution.insert(intervals,newInterval);
         System.out.println(result);
     }
 }
