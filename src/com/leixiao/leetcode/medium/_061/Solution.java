@@ -25,29 +25,46 @@ public class Solution {
     //向右旋转 4 步: 2->0->1->NULL
 
     public ListNode rotateRight(ListNode head,int k){
-        if (head == null || head.next == null) {
+        if(head == null || head.next == null){
             return head;
         }
 
-        int count = 1;
-        ListNode cur = head;
-        while (cur.next != null) {
+        ListNode cur = head.next;
+        int count = 2;
+        while (cur.next != null){
             count++;
             cur = cur.next;
         }
+
         k = k % count;
-        if (k == 0) {
-            return head;
-        }
+        if(k==0) return head;
+
         cur.next = head;
-        ListNode dummy = new ListNode(-1);
-        dummy.next = head;
-        ListNode prev = dummy;
-        for (int i = 0; i < count - k; i++) {
+
+        ListNode prev = head;
+        for (int i=1;i<count-k;i++){
             prev = prev.next;
         }
+
         cur = prev.next;
         prev.next = null;
         return cur;
+    }
+
+    public static void main(String[] args){
+        ListNode head = new ListNode(1);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(4);
+        ListNode node5 = new ListNode(5);
+
+        head.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+
+        Solution solution = new Solution();
+        ListNode node = solution.rotateRight(head,2);
+        return;
     }
 }
