@@ -14,7 +14,7 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
     </tr>
     <tr>
         <th>001</th>
-		<th><a href="note\_001\001.md">两数之和</a></th>
+		<th><a href="note\title\_001\001.md">两数之和</a></th>
         <th>数组，哈希表</th>
     </tr>
     <tr>
@@ -54,12 +54,12 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
     </tr>
     <tr>
         <th>010</th>
-        <th><a href="note\_010\010.md">正则表达式匹配</a></th>
+        <th><a href="note\title\_010\010.md">正则表达式匹配</a></th>
         <th>字符串，动态规划，回溯算法</th>
     </tr>
     <tr>
         <th>011</th>
-        <th><a href="note\_011\011.md">盛水最多的容器</a></th>
+        <th><a href="note\title\_011\011.md">盛水最多的容器</a></th>
         <th>数组，双指针</th>
     </tr>
     <tr>
@@ -194,7 +194,7 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
     </tr>    
     <tr>
         <th>041</th>
-        <th><a href="note\_041\041.md">缺失的第一个正数</a></th>
+        <th><a href="note\title\_041\041.md">缺失的第一个正数</a></th>
         <th>数组</th>
     </tr>
     <tr>
@@ -204,77 +204,77 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
     </tr>
     <tr>
         <th>043</th>
-        <th><a href="note\_043\043.md">字符串相乘</a></th>
+        <th><a href="note\title\_043\043.md">字符串相乘</a></th>
         <th>数学，字符串</th>
     </tr>
     <tr>
         <th>044</th>
-        <th><a href="note\_044\044.md">通配符匹配</a></th>
+        <th><a href="note\title\_044\044.md">通配符匹配</a></th>
         <th>贪心算法，字符串，动态规划，回溯算法</th>
     </tr>
     <tr>
     	<th>045</th>
-        <th><a href="note\_045\045.md">跳跃游戏II</a></th>
+        <th><a href="note\title\_045\045.md">跳跃游戏II</a></th>
         <th>贪心算法，数组</th>
     </tr>
     <tr>
     	<th>046</th>
-        <th><a href="note\_046\046.md">全排列</a></th>
+        <th><a href="note\title\_046\046.md">全排列</a></th>
         <th>回溯算法</th>
     </tr>
     <tr>
     	<th>047</th>
-        <th><a href="note\_047\047.md">全排列II</a></th>
+        <th><a href="note\title\_047\047.md">全排列II</a></th>
         <th>回溯算法</th>
     </tr>
     <tr>
     	<th>048</th>
-        <th><a href="note\_048\048.md">旋转图像</a></th>
+        <th><a href="note\title\_048\048.md">旋转图像</a></th>
         <th>数组</th>
     </tr>
     <tr>
     	<th>049</th>
-        <th><a href="note\_049\049.md">字母异位词分组</a></th>
+        <th><a href="note\title\_049\049.md">字母异位词分组</a></th>
         <th>哈希表，字符串</th>
     </tr>
     <tr>
        	<th>050</th>
-        <th><a href="note\_050\050.md">Pow(x, n)</a></th>
+        <th><a href="note\title\_050\050.md">Pow(x, n)</a></th>
         <th>数学，二分查找</th>
     </tr>
     <tr>
        	<th>051</th>
-        <th><a href="note\_051\051.md">N皇后</a></th>
+        <th><a href="note\title\_051\051.md">N皇后</a></th>
         <th>回溯算法</th>
     </tr>
     <tr>
        	<th>052</th>
-        <th><a href="note\_052\052.md">N皇后II</a></th>
+        <th><a href="note\title\_052\052.md">N皇后II</a></th>
         <th>回溯算法</th>
     </tr>
      <tr>
        	<th>053</th>
-        <th><a href="note\_053\053.md">最大子序和</a></th>
+        <th><a href="note\title\_053\053.md">最大子序和</a></th>
         <th>数组、分治算法、动态规划</th>
     </tr>
      <tr>
        	<th>054</th>
-        <th><a href="note\_054\054.md">螺旋矩阵</a></th>
+        <th><a href="note\title\_054\054.md">螺旋矩阵</a></th>
         <th>数组</th>
     </tr>
     <tr>
         <th>055</th>
-        <th><a href="note\_055\055.md">跳跃游戏</a></th>
+        <th><a href="note\title\_055\055.md">跳跃游戏</a></th>
         <th>贪心算法、数组</th>
     </tr>
     <tr>
         <th>056</th>
-        <th><a href="note\_056\056.md">合并区间</a></th>
+        <th><a href="note\title\_056\056.md">合并区间</a></th>
         <th>排序、数组</th>
     </tr>
     <tr>
         <th>057</th>
-        <th><a href="note\_057\057.md">插入区间</a></th>
+        <th><a href="note\title\_057\057.md">插入区间</a></th>
         <th>排序、数组</th>
     </tr>
     <tr>
@@ -284,7 +284,7 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
     </tr>
     <tr>
         <th>059</th>
-        <th><a href="note\_059\059.md">螺旋矩阵II</a></th>
+        <th><a href="note\title\_059\059.md">螺旋矩阵II</a></th>
         <th>数组</th>
     </tr>
     <tr>
@@ -294,10 +294,31 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
     </tr>
     <tr>
         <th>061</th>
-        <th><a href="note\_061\061.md">旋转链表</a></th>
+        <th><a href="note\title\_061\061.md">旋转链表</a></th>
         <th>链表，双指针</th>
     </tr>
+    <tr>
+        <th>062</th>
+        <th><a href="note\summary\dp\path.md">不同路径</a></th>
+        <th>数组，动态规划</th>
+    </tr>
+    <tr>
+        <th>063</th>
+        <th><a href="note\summary\dp\path.md">不同路径II</a></th>
+        <th>数组，动态规划</th>
+    </tr>
+    <tr>
+        <th>064</th>
+        <th><a href="note\summary\dp\path.md">最小路径和</a></th>
+        <th>数组，动态规划</th>
+    </tr>
+    <tr>
+        <th>065</th>
+        <th>有效数字</th>
+        <th>数组，字符串</th>
+    </tr>
 </table>
+
 
 
 
