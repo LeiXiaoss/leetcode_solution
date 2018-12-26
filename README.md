@@ -317,6 +317,11 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
         <th>有效数字</th>
         <th>数组，字符串</th>
     </tr>
+     <tr>
+        <th>066</th>
+        <th><a href="note\title\_066\066.md">加一</a></th>
+        <th>数组，数学</th>
+    </tr>
 </table>
 
 
