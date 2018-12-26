@@ -322,6 +322,11 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
         <th><a href="note\title\_066\066.md">加一</a></th>
         <th>数组，数学</th>
     </tr>
+    <tr>
+         <th>067</th>
+         <th><a href="note\title\_067\067.md">二进制求和</a></th>
+         <th>数学，字符串</th>
+    </tr>
 </table>
 
 
