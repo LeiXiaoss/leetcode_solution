@@ -327,6 +327,16 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
          <th><a href="note\title\_067\067.md">二进制求和</a></th>
          <th>数学，字符串</th>
     </tr>
+    <tr>
+         <th>068</th>
+         <th>文本左右对齐</th>
+         <th>字符串</th>
+    </tr>
+    <tr>
+          <th>069</th>
+          <th>x的平方根</th>
+          <th>数学，二分查找</th>
+    </tr>
 </table>
 
 
