@@ -347,6 +347,16 @@ leetcode的题库非常庞大，想要全部做完几乎是不可能的，本着
           <th>简化路径</th>
           <th>栈，字符串</th>
     </tr>
+    <tr>
+          <th>072</th>
+          <th>编辑距离</th>
+          <th>字符串，动态规划</th>
+    </tr>
+    <tr>
+          <th>073</th>
+          <th><a href="note\title\_073\073.md">矩阵置零</a></th>
+          <th>数组</th>
+    </tr>
 </table>
 
 
