@@ -43,6 +43,25 @@ public class Solution {
         }
     }
 
+    public List<List<Integer>> combine2(int n,int k){
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack2(result,n,k,1,new ArrayList<>());
+        return result;
+    }
+
+    private void backtrack2(List result,int n,int k,int index,List<Integer> temp){
+        if(k==0){
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for (int i=index;i<=n-k+1;i++){
+            temp.add(i);
+            backtrack2(result,n,k-1,i+1,temp);
+            temp.remove(temp.size()-1);
+        }
+    }
+
     public static void main(String[] args){
         Solution solution = new Solution();
         solution.combine(4,2);
