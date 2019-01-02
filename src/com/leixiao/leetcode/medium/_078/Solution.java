@@ -44,7 +44,18 @@ public class Solution {
 
     //位运算
     public List<List<Integer>> subsets1(int[] nums){
-        return null;
+        List<List<Integer>> result = new ArrayList<>((int)Math.pow(2,nums.length));
+
+        for(int i=0;i<nums.length;i++){
+            for (int j=0;j<Math.pow(2,nums.length);j++){
+                if(i==0) result.add(new ArrayList<>());
+                String str = Integer.toBinaryString(j>>i);
+                if(str.charAt(str.length()-1)=='1'){
+                    result.get(j).add(nums[i]);
+                }
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args){
