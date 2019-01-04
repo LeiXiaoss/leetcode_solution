@@ -26,7 +26,7 @@ public class Solution {
         int middle;
 
         while (start<=end){
-            //如果出现大量重复，直接退化为线性查找
+            //如果出现左右相同，直接退化为线性查找
             if (nums[start] == nums[end]){
                 for (int i=start;i<=end;i++){
                     if (nums[i] == target) return true;
