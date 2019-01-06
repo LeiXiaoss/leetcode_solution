@@ -48,7 +48,6 @@ public class Solution {
                 pre = pre.next;
             }else {
                 cur = cur.next;
-                continue;
             }
         }
         return dummy.next;
