@@ -51,28 +51,33 @@ public class Solution {
     //使用 O(n) 空间复杂度的解法很容易实现。
     //你能想出一个只使用常数空间的解决方案吗？
 
+    //这个方法做了很多次遍历，还有很大改进空间
     public void recoverTree(TreeNode root) {
         List<Integer> list = inOrder(root);
 
-        int first=list.get(1),last=list.get(0);
+        int small=list.get(1),big=list.get(0);
+        int index = 0;
+
         for (int i=0;i<list.size()-1;i++){
-            if(list.get(i) > list.get(i+1)){
-                first = list.get(i+1);
+            if(list.get(i)>list.get(i+1)){
+                big = list.get(i);
+                index = i;
+                break;
             }
         }
 
-        for (int i=1;i<first;i++){
-            if(list.get(i-1)<list.get(first)&&list.get(i+1)>list.get(first)){
-                last = list.get(i);
+        for (int i=index;i<list.size()-1;i++){
+            if(list.get(i)>list.get(i+1)){
+                small = list.get(i+1);
             }
         }
 
-        recoverTree(root,first,last);
+        recoverTree(root,small,big);
     }
 
-    private void recoverTree(TreeNode root,int first,int last){
-        TreeNode beforeNode = root;
-        TreeNode afterNode = root;
+    private void recoverTree(TreeNode root,int small,int big){
+        TreeNode smallNode = root;
+        TreeNode bigNode = root;
 
         Stack<TreeNode> stack = new Stack<>();
 
@@ -85,11 +90,11 @@ public class Solution {
             if(!stack.isEmpty()){
                 root = stack.pop();
 
-                if (root.val == last){
-                    afterNode = root;
+                if (root.val == big){
+                    bigNode = root;
                 }
-                if(root.val == first){
-                    beforeNode = root;
+                if(root.val == small){
+                    smallNode = root;
                     break;
                 }
 
@@ -97,9 +102,11 @@ public class Solution {
             }
         }
 
-
+        smallNode.val = big;
+        bigNode.val = small;
     }
 
+    //中序遍历
     private List inOrder(TreeNode root){
         List<Integer> result = new ArrayList<>();
 
@@ -113,5 +120,23 @@ public class Solution {
             result.addAll(rightList);
         }
         return result;
+    }
+
+
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        TreeNode node1 = new TreeNode(3);
+        TreeNode node2 = new TreeNode(2);
+//        TreeNode node3 = new TreeNode(2);
+
+        root.left = node1;
+//        root.right = node2;
+
+        node1.right = node2;
+
+        Solution solution = new Solution();
+        solution.recoverTree(root);
+        return;
     }
 }
