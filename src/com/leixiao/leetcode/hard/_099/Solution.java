@@ -53,8 +53,10 @@ public class Solution {
 
     //这个方法做了很多次遍历，还有很大改进空间
     public void recoverTree(TreeNode root) {
+        //获取中序遍历
         List<Integer> list = inOrder(root);
 
+        //查找需要交换的节点
         int small=list.get(1),big=list.get(0);
         int index = 0;
 
@@ -120,6 +122,37 @@ public class Solution {
             result.addAll(rightList);
         }
         return result;
+    }
+
+    //常数空间的解法
+    TreeNode preNode;
+    TreeNode smallNode;
+    TreeNode bigNode;
+    public void removeTree(TreeNode root){
+        dfs(root);
+
+        int temp = bigNode.val;
+        bigNode.val = smallNode.val;
+        smallNode.val = temp;
+    }
+
+    private void dfs(TreeNode root){
+        if(root.left != null){
+            dfs(root.left);
+        }
+
+        if(preNode == null || preNode.val > root.val){
+            if(bigNode == null){
+                bigNode = preNode;
+            }
+            smallNode = root;
+        }
+
+        preNode = root;
+
+        if(root.right != null){
+            dfs(root.right);
+        }
     }
 
 
