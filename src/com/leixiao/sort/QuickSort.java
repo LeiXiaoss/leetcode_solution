@@ -2,6 +2,7 @@ package com.leixiao.sort;
 
 public class QuickSort {
 
+    //使用第一个数开始作为分割点
     public void sort(int[] array,int start,int end){
         if(start < end) {
             int i = start, j = end, x = array[start];
@@ -37,31 +38,41 @@ public class QuickSort {
             return;
         }
 
-        int smallIndex = partition(array,left,right);
+        int pivot = partition(array,left,right);
 
-        if(smallIndex > left){
-            sort1(array,left,smallIndex-1);
+        if(pivot > left){
+            sort1(array,left,pivot-1);
         }
 
-        if(smallIndex < right){
-            sort1(array,smallIndex+1,right);
+        if(pivot < right){
+            sort1(array,pivot+1,right);
         }
     }
 
+    //选取随机位置的数字作为分割数，并将这个数交换到开头或者结尾，再进行操作
     public int partition(int[] array,int left,int right){
         int pivot = (int)(left + Math.random()*(right-left+1));
-        int smallIndex = left - 1;
-        swap(array,pivot,right);
+        swap(array,pivot,left);
 
-        for (int i=left;i<right;i++){
-            if(array[i] <= array[right]){
-                smallIndex++;
-                if(i>smallIndex){
-                    swap(array,i,smallIndex);
-                }
+        int i = left, j = right ,x = array[left];
+
+        while (i < j){
+            while (i < j && array[j] >= x){
+                j--;
+            }
+            if(i < j){
+                array[i++] = array[j];
+            }
+
+            while (i < j && array[i] < x){
+                i++;
+            }
+            if (i < j){
+                array[j--] = array[i];
             }
         }
-        return smallIndex;
+        array[i] = x;
+        return i;
     }
 
     public void swap(int[] array,int i,int j){
@@ -74,7 +85,7 @@ public class QuickSort {
         QuickSort quickSort = new QuickSort();
         int[] array = new int[]{9,8,6,5,3,7,2,1};
 
-        quickSort.sort(array,0,array.length-1);
+        quickSort.sort1(array,0,array.length-1);
         return;
     }
 }
