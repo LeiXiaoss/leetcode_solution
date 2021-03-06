@@ -85,7 +85,7 @@ public class QuickSort {
         QuickSort quickSort = new QuickSort();
         int[] array = new int[]{9,8,6,5,3,7,2,1};
 
-        quickSort.sort1(array,0,array.length-1);
+        quickSort.sort(array,0,array.length-1);
         return;
     }
 }
