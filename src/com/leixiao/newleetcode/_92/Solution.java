@@ -12,7 +12,7 @@ public class Solution {
 			pre = pre.next;
 		}
 
-		ListNode rightNode = dummyNode;
+		ListNode rightNode = pre;
 		for (int i=0; i < right-left+1; i++) {
 			rightNode = rightNode.next;
 		}
